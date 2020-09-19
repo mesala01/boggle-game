@@ -1,0 +1,86 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Boggle</title>
+    <link rel="stylesheet" href="/static/boggle.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  </head>
+  <body>
+    <div class="container justify-content-center">
+      <p class="h1 text-center">B.O.G.G.L.E</p>
+    <div class="row">
+
+    <section id="boggle" class="col ">
+
+      <table class="board center">
+        <tbody>
+          {% for row in board %}
+          <tr>
+            {% for cell in row %}
+            <td>{{ cell }}</td>
+            {% endfor %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="center">
+      <p>Highest Score: 
+        <b>{{ highestscore }}</b> 
+        in {{ nplays }} plays
+      </p>
+
+      <p>
+        Score: <b class="score">0</b>
+        
+      </p>
+      <p>
+        Time Left to play: <b class="timer"></b> <span> <b> seconds</b></span>
+      </p>
+      <div class="row mb-2">
+      <form method="POST" class="add-word form-inline col">
+        <div class="form-group">
+        <input name="word" class="word form-control mr-2" autofocus>
+        <button type="submit" class="btn btn-secondary">Enter</button>
+        </div>
+        
+      </form>
+      </div>
+
+      <div class="row">
+      <form action="{{url_for('reset_game')}}"  class="d-inline col-4 ">
+        <div class="form-group">
+        <button class="btn btn-dark">Reset Game</button>
+        </div>
+      </form>
+
+
+      <form action="{{url_for('new_game')}}"  class="d-inline col-4 ">
+        <div class="form-group">
+        <button class="btn btn-info">New Game</button>
+        </div>
+      </form>
+      </div>
+
+      <p class="msg">
+        <!-- our JS will put messages here dynamically -->
+      </p>
+
+      <ul class="words">
+        <!-- our JS will words here as they score -->   
+      </ul>
+      </div>
+      
+
+    </section>
+    </div>
+    </div>
+    <script src="http://unpkg.com/jquery"></script>
+    <script src="https://unpkg.com/axios@0.19.0/dist/axios.js"></script>
+    <script src="/static/boggle.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <script>
+      let game = new BoggleGame("boggle", 120);
+    </script>
+  </body>
+</html>
